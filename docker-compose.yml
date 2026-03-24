@@ -1,0 +1,13 @@
+services:
+  voice-agent:
+    build: .
+    ports:
+      - "7005:7005"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - JWT_SECRET_KEY=ssgc-voice-agent-secret-2025
+      - PORT=7005
+    volumes:
+      - ./recordings:/app/recordings
+      - ./static:/app/static
+    restart: unless-stopped
