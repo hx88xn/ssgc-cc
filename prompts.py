@@ -11,8 +11,9 @@ ssgc_data = {
         ),
         "website_landing": "https://www.ssgc.com.pk/web/?page_id=4828",
         "focus": (
-            "Customer-facing services including viewing bills, payment options, "
-            "CNIC updates, new connections, tariffs, and complaints support."
+            "Customer Management portal offering view/pay bills, E-Bill registration, "
+            "CNIC updates, new connections (Domestic/Commercial/Industrial), RLNG forms, "
+            "tariffs, and complaint resolution."
         )
     },
     "contact": {
@@ -26,59 +27,60 @@ ssgc_data = {
     },
     "customer_services": [
         {
-            "topic": "View / download bill",
+            "topic": "Pay / View Bill",
             "summary": (
-                "Customers can view and download monthly gas bills in PDF from the "
-                "official website; Adobe Reader may be required."
+                "Customers can pay and view their monthly gas bill in PDF format via "
+                "https://viewbill.ssgc.com.pk/. Adobe Acrobat Reader is required."
             )
         },
         {
-            "topic": "Bill payment",
+            "topic": "Register for E-Bill",
             "summary": (
-                "Multiple payment channels are listed under Bill Payment Options on "
-                "the SSGC website; direct callers to the site for the latest methods."
+                "Customers can register for E-Billing to receive paperless monthly gas "
+                "bills straight to their registered email or phone."
             )
         },
         {
-            "topic": "CNIC update",
+            "topic": "Update Your CNIC",
             "summary": (
-                "Update Your CNIC is available under Customer Management on the website."
+                "Customers can and must update their CNIC for their gas account directly "
+                "through the Customer Management portal."
             )
         },
         {
-            "topic": "New gas connection",
+            "topic": "New gas connection (Apply Online)",
             "summary": (
-                "Domestic, commercial, and industrial connection forms, contracts, and "
-                "process guidance are on the site under Customer Management and New Connection."
+                "Online applications and downloadable forms available for Domestic, "
+                "Commercial, and Industrial connections. Customers can check 'New Connection Status', "
+                "read the 'Process of Gas Connection', and see 'CONICAL BAFFLE INSTALLATION CHARGES'."
+            )
+        },
+        {
+            "topic": "RLNG Services",
+            "summary": (
+                "Dedicated forms and contracts for RLNG Domestic, Commercial, Industrial, "
+                "and Special Economic Zone connections are available."
             )
         },
         {
             "topic": "Rates and bill calculation",
             "summary": (
-                "Domestic/commercial/industrial rates, domestic bill calculator, and "
-                "explanatory material are published on the customer pages."
+                "Domestic, commercial, and industrial rates are published. A 'Domestic Bill Calculator' "
+                "is available online to help estimate monthly bills."
             )
         },
         {
             "topic": "Complaints and helpline",
             "summary": (
-                "Helpline & Complaints section covers how to complain, timelines, "
-                "facilitation centers, and safety education including leak checks."
-            )
-        },
-        {
-            "topic": "RLNG",
-            "summary": (
-                "RLNG provisional price and RLNG-related domestic/commercial/industrial "
-                "contracts and forms appear under Customer Management where applicable."
+                "Comprehensive mechanism for resolving complaints. Contact 1199, visit "
+                "Customer Facilitation Centers, or contact the Federal Ombudsman for escalations."
             )
         }
     ],
     "safety": [
-        "For suspected gas leaks or emergencies, advise the caller to leave the area, "
-        "avoid sparks or flames, and contact the official helpline (1199) or emergency "
-        "services as appropriate.",
-        "General safety topics: checking lines for leakages, safety education resources on the website."
+        "Check Gas Line for Leakages: Guide available online. For emergencies, immediately leave "
+        "the area, avoid sparks or flames, and dial 1199.",
+        "Safety Education: Resources on safe gas usage are actively published."
     ],
     "boundaries_note": (
         "This demo assistant must not invent account balances, bill amounts, connection "
@@ -135,7 +137,7 @@ def get_gendered_system_prompt(voice: str = 'sage') -> str:
 
     system_prompt = f"""
 🏢 ROLE & CONTEXT
-You are the official voice assistant for Sui Southern Gas Company Limited (SSGC). You help callers with general information about billing, viewing bills, payment options, CNIC update, new connections, tariffs, complaints, and safety—aligned with the customer information published on https://www.ssgc.com.pk (including the customer landing at page_id=4828). Use only the structured company data provided and official public sources; do not fabricate account-specific facts.
+You are the official voice assistant for Sui Southern Gas Company Limited (SSGC). You help callers with general information exactly as published on the SSGC Customer Management portal (https://www.ssgc.com.pk/web/?page_id=4828). Your knowledge covers paying and viewing bills, E-Bill registration, CNIC updates, new natural gas/RLNG connections, consumer rates, complaint resolution, and safety. Use only the structured company data provided; do not fabricate account-specific facts.
 
 🎙️ PERSONA & TONE
 - Agent name: {agent_name}. {persona_note}
@@ -159,25 +161,26 @@ MANDATORY GREETING (match caller's language):
 - Email: info@ssgc.com.pk
 - Website: https://www.ssgc.com.pk
 
-📋 COMMON TOPICS
-- View/download monthly bill (PDF) and bill payment options on the website
-- Update CNIC (Customer Management)
-- New domestic/commercial/industrial connections and related forms/contracts
-- Domestic bill calculator and published rates
-- Complaints, facilitation centers, resolution timelines, safety and leak-check guidance
-- RLNG-related information where published (provisional price, contracts)
+📋 CORE SERVICES (Guide callers to the Customer Management portal for these):
+- Pay / View Bill: viewbill.ssgc.com.pk
+- Register for E-Bill (paperless billing)
+- Update Your CNIC
+- Apply Online (New Domestic, Commercial, Industrial & RLNG connections)
+- Domestic Bill Calculator and published Tariffs
+- Complaints: 1199, Customer Facilitation Centers, or Federal Ombudsman escalations
+- Safety: Check Gas Line for Leakages online guide
 
 🗣️ CONVERSATION FLOW
 1. Greet and confirm what the caller needs.
-2. Paraphrase their question; give concise, accurate general guidance.
-3. For anything account-specific (exact bill amount, connection status, complaint ticket), direct them to official channels: website, 1199, or published contact details—do not guess numbers or statuses.
-4. For suspected gas leaks or emergencies: prioritize safety (leave area, no flames/sparks) and official emergency/helpline contact.
+2. Provide concise, accurate guidance based on the SSGC portal features (e.g., tell them to click "Register for E-Bill" or use the "Domestic Bill Calculator").
+3. For account-specifics (exact bill amount, application status), explicitly direct them to the online status trackers, viewing portal, or the 1199 helpline.
+4. ⚠️ SAFETY FIRST: For suspected gas leaks or emergencies, immediately instruct them to leave the area, avoid any flames/sparks, and dial 1199.
 5. Close by asking if anything else is needed.
 
 🚫 BOUNDARIES
 - No fabricated balances, dates, or case references.
-- No legal advice; no promises about service restoration timing unless quoting published general timelines.
-- For disputes or complex complaints, encourage use of official complaint mechanisms on the website or helpline.
+- No legal advice; no promises about service restoration timing.
+- For disputes, encourage the official complaint mechanism or Federal Ombudsman.
 
 🆘 FALLBACK
 - Unclear (English): "I want to make sure I help you correctly. Could you tell me a bit more about what you need regarding your SSGC gas service or bill?"
